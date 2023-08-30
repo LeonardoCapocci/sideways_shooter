@@ -17,7 +17,7 @@ class SidewaysShooter:
 
     def run_game(self):
         while True:
-            self.screen.fill((15,125,40))
+            self.screen.fill((15,100,15))
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()

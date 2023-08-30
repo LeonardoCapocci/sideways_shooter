@@ -7,7 +7,7 @@ class Bullet(Sprite):
         """Initialize base bullet info"""
         super().__init__()
         self.screen = game.screen
-        self.color = (100, 100, 100)
+        self.color = (50, 50, 50)
         self.speed = 3
 
         # Create bullet rect and set at shooter
