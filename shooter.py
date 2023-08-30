@@ -13,9 +13,15 @@ class Shooter:
         self.y = float(self.rect.y)
     
         # Shooter position starts non moving
-        moving_up = False
-        moving_down = False
+        self.moving_up = False
+        self.moving_down = False
+        self.speed = 5
 
     def update(self, ss_game):
         """Updates positioning of shooter"""
         self.screen.blit(self.shooter, self.rect)
+        if self.moving_up and self.y > 0:
+            self.y -= self.speed
+        if self.moving_down and self.rect.bottom < self.screen_rect.bottom:
+            self.y += self.speed
+        self.rect.y = self.y
