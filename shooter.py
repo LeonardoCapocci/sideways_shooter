@@ -1,9 +1,9 @@
 import pygame
 
 class Shooter:
-    """Class to represent the fabled shooter"""
+    """Class to represent the fabled shooter."""
     def __init__(self, game):
-        """Initialize shooter attributes"""
+        """Initialize shooter attributes."""
         self.screen = game.screen
         self.screen_rect = self.screen.get_rect()
         self.shooter = pygame.image.load('shooter.bmp')
@@ -17,11 +17,14 @@ class Shooter:
         self.moving_down = False
         self.speed = 5
 
-    def update(self, ss_game):
-        """Updates positioning of shooter"""
-        self.screen.blit(self.shooter, self.rect)
+    def update(self):
+        """Updates positioning of shooter."""
         if self.moving_up and self.y > 0:
             self.y -= self.speed
         if self.moving_down and self.rect.bottom < self.screen_rect.bottom:
             self.y += self.speed
         self.rect.y = self.y
+    
+    def draw_shooter(self):
+        """Draws the shooter."""
+        self.screen.blit(self.shooter, self.rect)
