@@ -1,6 +1,8 @@
 import sys
 import pygame
 
+from shooter import Shooter
+
 class SidewaysShooter:
     """Class to represent a cowboy that shoots across the screen"""
     def __init__(self):
@@ -8,12 +10,7 @@ class SidewaysShooter:
         pygame.init()
         self.clock = pygame.time.Clock()
         self.screen = pygame.display.set_mode((1280, 720))
-        self.screen_rect = self.screen.get_rect()
-        self.shooter = pygame.image.load('shooter.bmp')
-        self.shooter = pygame.transform.scale(self.shooter, (100,220))
-        self.shooter_rect = self.shooter.get_rect()
-        self.shooter_rect.midleft = self.screen_rect.midleft
-        
+        self.shooter = Shooter(self)       
     
     def run_game(self):
         while True:
@@ -24,7 +21,7 @@ class SidewaysShooter:
                     if event.key == pygame.K_q:
                         sys.exit()
             self.screen.fill((15,125,40))
-            self.screen.blit(self.shooter, self.shooter_rect)
+            self.shooter.update(self)
 
             self.clock.tick(60)
             pygame.display.flip()
