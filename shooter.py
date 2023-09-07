@@ -15,7 +15,7 @@ class Shooter:
         # Shooter position starts non moving
         self.moving_up = False
         self.moving_down = False
-        self.speed = 5
+        self.speed = 7
 
     def update(self):
         """Updates positioning of shooter."""
