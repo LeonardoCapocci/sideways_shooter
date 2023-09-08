@@ -1,10 +1,12 @@
 import sys
+from time import sleep
 import pygame
 
 from shooter import Shooter
 from bullets import Bullet
 from enemy import Poster
 from enemy import Enemy
+from game_stats import GameStats
 
 class SidewaysShooter:
     """Class to represent a cowboy that shoots across the screen"""
@@ -19,6 +21,8 @@ class SidewaysShooter:
         self.bullets = pygame.sprite.Group()
         self.posters = pygame.sprite.Group()   
         self.enemies = pygame.sprite.Group()
+
+        self.game_stats = GameStats(self)
 
         self._create_poster()
 
@@ -37,6 +41,9 @@ class SidewaysShooter:
             self.enemies.update()
 
             self._check_collisions()
+            self._shooter_hit()
+            self._check_enemies_left()
+
             self._update_screen()
             self.clock.tick(60)
             pygame.display.flip()
@@ -101,6 +108,26 @@ class SidewaysShooter:
                                                 True, True)
         collisions = pygame.sprite.groupcollide(self.bullets, self.enemies, 
                                                 True, True)
+    
+    def _shooter_hit(self):
+        """Checks for collisions between the enemy and the shooter."""
+        if pygame.sprite.spritecollideany(self.shooter, self.enemies):
+            print("Shooter Hit!!!")
+            self.game_stats.lives_left -= 1
+            sleep(1)
+            self.bullets.empty()
+            self.enemies.empty()
+    
+    def _check_enemies_left(self):
+        """Checks if the enemy has hit the left border of the screen"""
+        for enemy in self.enemies.sprites():
+            if enemy.rect.x <= 0:
+                self.game_stats.lives_left -= 1
+                sleep(1)
+                self.bullets.empty()
+                self.enemies.empty()
+                break
+
         
     def _update_screen(self):
         """Updates the screen every tick."""

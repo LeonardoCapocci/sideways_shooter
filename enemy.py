@@ -19,7 +19,7 @@ class Poster(Sprite):
     
     def update(self):
         """Update the positioning of the enemy."""
-        self.rect.x -= 2
+        self.rect.x -= 5
 
 
 class Enemy(Sprite):
@@ -29,7 +29,6 @@ class Enemy(Sprite):
         super().__init__()
         self.screen = game.screen
         self.screen_rect = self.screen.get_rect()
-        self.speed = 5
 
         # Load image and set size
         self.image = pygame.image.load('enemy.bmp')
@@ -41,4 +40,4 @@ class Enemy(Sprite):
     
     def update(self):
         """Update the positioning of the enemy."""
-        self.rect.x -= self.speed
+        self.rect.x -= 8
